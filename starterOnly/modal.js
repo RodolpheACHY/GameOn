@@ -91,18 +91,19 @@ function validerNbConcours(nbConcours) {    
 *
 * @throws {Error}
 */
-
 function validerBtnRadioVille() {
   let listBtnRadioville = document.querySelectorAll('input[name="location"]')    
   let location = ""				
   for (let i = 0; i < listBtnRadioville.length; i++) {  
       if (listBtnRadioville[i].checked) {			
-          location = listBtnRadioCouleur[i].value  
+          location = listBtnRadioville[i].value  
           break
+      } 
+      if (location === "") {  
+          throw new Error("Veuillez choisir une ville")
       }
-  }
+  }  
 }
-
 
 
 /**
@@ -111,9 +112,12 @@ function validerBtnRadioVille() {
 * @throws {Error}
 */
 function validerAccepterConditions() {
-let baliseAccepter = document.getElementById("checkbox1")
-let accepter = baliseAccepter.checked
-console.log(accepter); // affiche true ou false
+  let baliseAccepter = document.getElementById("checkbox1")
+  let accepter = baliseAccepter.checked
+  if (!accepter)  {  
+    throw new Error("Merci de bien vouloir accepter les conditions d'utilisation")        
+  }
+  console.log(accepter); // affiche true ou false
 }
 
 /**
