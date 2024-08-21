@@ -25,6 +25,18 @@ form.addEventListener("submit", function (event) {
   } else {
     resetErrorElement(prenomElement);
   }
+
+  const nomElement = document.getElementById("last");
+  const nom = nomElement.value;
+  const validNom = validerNom(nom);
+  if (validNom === false) {
+    setErrorElement(nomElement);
+  } else {
+    resetErrorElement(nomElement);
+  }
+
+  
+
 });
 
 function setErrorElement(input) {
@@ -67,7 +79,7 @@ function validerPrenom(prenom) {
   if (prenom.length > 2) {
     return true;
   }
-  return false;
+    return false;
 }
 
 /**
@@ -77,9 +89,10 @@ function validerPrenom(prenom) {
  * @throws {Error}
  */
 function validerNom(nom) {
-  if (nom.length < 2) {
-    throw new Error(`Le nom ${nom} est trop court`);
+  if (nom.length > 2) {
+    return true;
   }
+    return false;
 }
 
 /**
