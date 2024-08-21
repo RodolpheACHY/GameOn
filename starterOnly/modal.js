@@ -35,8 +35,15 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nomElement);
   }
 
+  const emailElement = document.getElementById("email");
+  const email = emailElement.value;
+  const validEmail = validerEmail(email);
+  if (validEmail === false) {
+    setErrorElement(emailElement);
+  } else {
+    resetErrorElement(emailElement);
+  }
   
-
 });
 
 function setErrorElement(input) {
@@ -103,8 +110,9 @@ function validerNom(nom) {
 function validerEmail(email) {
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
   if (!emailRegExp.test(email)) {
-    throw new Error("L'e-mail n'est pas valide");
+    return false
   }
+    return true;
 }
 
 /**
@@ -114,8 +122,9 @@ function validerEmail(email) {
  */
 function validerNbConcours(nbConcours) {
   if (Number.isNaN(nbConcours)) {
-    throw new Error("Veuillez entrer un nombre entier positif");
+    return true;
   }
+    return false;
 }
 
 /**
