@@ -44,16 +44,59 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(emailElement);
   }
   
+  const dateNaissanceElement = document.getElementById("birthdate");
+  let dateNaiss = new Date(dateNaissanceElement.value);
+  const validDateNaiss = validerDateNaiss(dateNaiss);
+  if (validDateNaiss === false) {
+    setErrorElement(dateNaissanceElement);
+  } else {
+    resetErrorElement(dateNaissanceElement);
+  }
+
+  dateNaiss = new Date(dateNaissanceElement.value);
+  const validDateNaiss18 = valider18ans(dateNaiss);
+  if (validDateNaiss18 === false) {
+    setErrorElement(validDateNaiss18);
+  } else {
+    resetErrorElement(validDateNaiss18);
+  }
+
+  const nbConcoursElement = document.getElementById("quantity");
+  const nbConcours = nbConcoursElement.value;
+  const validNbConcours = validerNbConcours(nbConcours);
+  if (validNbConcours === false) {
+    setErrorElement(nbConcoursElement);
+  } else {
+    resetErrorElement(nbConcoursElement);
+  }
+
+ 
+  const listBtnRadiovilleElement = document.querySelectorAll('input[name="location"]');
+  const location = listBtnRadioville[i].value
+  const validBtnRadioVille = validerBtnRadioVille(location);
+  if (validBtnRadioVille === false) {
+    setErrorElement(listBtnRadiovilleElement);
+  } else {
+    resetErrorElement(listBtnRadiovilleElement);
+  }
+  
+  
 });
 
 function setErrorElement(input) {
   const errorEl = input.closest(".formData");
   errorEl.setAttribute("data-error-visible", "true");
 }
+
 function resetErrorElement(input) {
   const errorEl = input.closest(".formData");
   errorEl.removeAttribute("data-error-visible");
 }
+
+/*function message18AnsElement(input) {
+const errorEl = input.closest(".formData");
+const tooYoungMessage = errorEl.getAttribute("data-error-too-young");
+}*/
 
 navLink.addEventListener("click", editNav);
 
@@ -116,15 +159,54 @@ function validerEmail(email) {
 }
 
 /**
+ * Cette fonction prend une date en paramètre et vérifie si le user a plus de 18 ans
+ * ici : deux caractères au minimum
+ * @param {Date} dateNaiss
+ */
+function valider18ans(dateNaiss) {
+  const maintenant = new Date();
+  const ageMinimum = 18;
+  let age = maintenant.getFullYear() - dateNaiss.getFullYear();
+  const moisDifference = maintenant.getMonth() - dateNaiss.getMonth();
+  if (moisDifference < 0 || (moisDifference === 0 && maintenant.getDate() < dateNaiss.getDate())) {
+    age--;
+  }  
+  return age >= ageMinimum;
+}
+
+/**
+ * Cette fonction prend une date en paramètre et vérifie si la date saisie est valide
+ * ici : deux caractères au minimum
+ * @param {Date} dateNaiss
+ */
+function validerDateNaiss(dateNaiss) {
+  // Regex pour valider le format JJ/MM/AAAA
+  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+
+  if (!dateRegex.test(dateNaiss)) {
+      return false; // Format incorrect
+  }
+
+
+  const [jour, mois, annee] = dateNaiss.split('/').map(Number);
+  dateNaiss = new Date(annee, mois - 1, jour); // mois - 1 car les mois en JS sont 0-indexés
+  // Vérifie que la date est valide (par exemple, pas de 30 février)
+  if (dateNaiss.getDate() !== jour || dateNaiss.getMonth() !== mois - 1 || dateNaiss.getFullYear() !== annee) {
+      return false; // Date non valide
+  }
+      return true;
+}
+
+/**
  * Cette fonction prend un string en paramètre et valide qu'il est au bon format.
  * @param {string} nbConcours
- * @throws {Error}
  */
 function validerNbConcours(nbConcours) {
-  if (Number.isNaN(nbConcours)) {
-    return true;
-  }
+  let quantityRegExp = new RegExp("^\\d+$");
+  if (!quantityRegExp.test(nbConcours)) {
     return false;
+  }
+    return true;
 }
 
 /**
@@ -140,9 +222,12 @@ function validerBtnRadioVille() {
       location = listBtnRadioville[i].value;
       break;
     }
-    if (location === "") {
-      throw new Error("Veuillez choisir une ville");
-    }
+  }
+
+  if (location === "") {
+    return false;
+  } else {  
+    return true;
   }
 }
 

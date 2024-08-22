@@ -93,7 +93,8 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="La date saisie n'est pas valide."
+                                 data-error-too-young="Vous êtes trop jeune.">
                 <label>Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -103,13 +104,13 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Merci de saisir un nombre entier positif">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData">
+                class="formData" data-error="Merci de sélectionner au moins une ville">
                 <input
                   class="checkbox-input"
                   type="radio"
