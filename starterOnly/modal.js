@@ -53,12 +53,12 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(dateNaissanceElement);
   }
 
-   dateNaiss = new Date(dateNaissanceElement.value);
+  dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
   if (validDateNaiss18 === false) {
-    setErrorElement(dateNaissanceElement);
+    setErrorTooYoungElement(dateNaissanceElement);
   } else {
-    resetErrorElement(dateNaissanceElement);
+    resetErrorTooYoungElement(dateNaissanceElement);
   } 
 
   const nbConcoursElement = document.getElementById("quantity");
@@ -97,6 +97,16 @@ function setErrorElement(input) {
 function resetErrorElement(input) {
   const errorEl = input.closest(".formData");
   errorEl.removeAttribute("data-error-visible");
+}
+
+function setErrorTooYoungElement(input) {
+  const errorEl = input.closest(".formData");
+  errorEl.setAttribute("data-error-too-young-visible", "true");
+}
+
+function resetErrorTooYoungElement(input) {
+  const errorEl = input.closest(".formData");
+  errorEl.removeAttribute("data-error-too-young-visible");
 }
 
 /*function message18AnsElement(input) {
@@ -174,6 +184,7 @@ function valider18ans(dateNaiss) {
   const ageMinimum = 18;
   let age = maintenant.getFullYear() - dateNaiss.getFullYear();
   const moisDifference = maintenant.getMonth() - dateNaiss.getMonth();
+  console.log(dateNaiss);
   if (moisDifference < 0 || (moisDifference === 0 && maintenant.getDate() < dateNaiss.getDate())) {
     age--;
   }  
