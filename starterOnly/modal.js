@@ -17,6 +17,8 @@ const form = document.querySelector('form[name="reserve"]');
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  // Vérification du prénom
   const prenomElement = document.getElementById("first");
   const prenom = prenomElement.value;
   const validPrenom = validerPrenom(prenom);
@@ -26,6 +28,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(prenomElement);
   }
 
+  // Vérification du nom
   const nomElement = document.getElementById("last");
   const nom = nomElement.value;
   const validNom = validerNom(nom);
@@ -35,6 +38,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nomElement);
   }
 
+  // Vérification de l'email
   const emailElement = document.getElementById("email");
   const email = emailElement.value;
   const validEmail = validerEmail(email);
@@ -44,8 +48,17 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(emailElement);
   }
   
+  // Vérification si le champ est vide
   const dateNaissanceElement = document.getElementById("birthdate");
   let dateNaiss = new Date(dateNaissanceElement.value);
+  const validDateNaissNonVide = validerChampsNonVide(dateNaiss);
+  if (validDateNaissNonVide === false) {
+    setErrorElement(dateNaissanceElement);
+  } else {
+    resetErrorElement(dateNaissanceElement);
+  }
+  
+  // Vérification du format de la date de naissance saisie
   const validDateNaiss = validerDateNaiss(dateNaiss);
   if (validDateNaiss === false) {
     setErrorElement(dateNaissanceElement);
@@ -53,6 +66,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(dateNaissanceElement);
   }
 
+  // Vérification de l'âge du participant
   dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
   if (validDateNaiss18 === false) {
@@ -61,6 +75,7 @@ form.addEventListener("submit", function (event) {
     resetErrorTooYoungElement(dateNaissanceElement);
   } 
 
+  // Vérification du nombre de concours auxquels le user a déjà participé 
   const nbConcoursElement = document.getElementById("quantity");
   const nbConcours = nbConcoursElement.value;
   const validNbConcours = validerNbConcours(nbConcours);
@@ -70,16 +85,15 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nbConcoursElement);
   }
 
-  
-  const listBtnRadiovilleElement =  document.getElementById("choixVille"); //document.querySelector('input[name="location"]');
-  //const location = listBtnRadiovilleElement[i].value
-  //const validBtnRadioVille = validerBtnRadioVille(location);
+  // Vérification de la ville sélectionnée
+  const listBtnRadiovilleElement =  document.getElementById("choixVille"); 
   if (validerBtnRadioVille() === false) {
     setErrorElement(listBtnRadiovilleElement);
   } else {
     resetErrorElement(listBtnRadiovilleElement);
   }
   
+  // Vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
   const accepterConditionsElement = document.getElementById("checkbox1");
   if (validerAccepterConditions() === false) {
     setErrorElement(accepterConditionsElement);
@@ -174,6 +188,19 @@ function validerEmail(email) {
     return true;
 }
 
+
+/**
+ * Cette fonction prend une date en paramètre et vérifie si le champs n'est pas vide
+ * @param {Date} dateNaiss
+ */
+function validerChampsNonVide(dateNaiss) {
+  if (!dateNaiss || dateNaiss === "jj/mm/aaaa" || dateNaiss === "") {
+    return false; // Le champ est vide
+  } else {
+    return true;
+  }
+}
+
 /**
  * Cette fonction prend une date en paramètre et vérifie si le user a plus de 18 ans
  * ici : deux caractères au minimum
@@ -199,11 +226,10 @@ function valider18ans(dateNaiss) {
 function validerDateNaiss(dateNaiss) {
   // Regex pour valider le format JJ/MM/AAAA
   const dateRegex = new RegExp("^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$");
-
+  console.log(dateNaiss);
   if (!dateRegex.test(dateNaiss)) {
       return false; // Format incorrect
   }
-
 
   const [jour, mois, annee] = dateNaiss.split('/').map(Number);
   dateNaiss = new Date(annee, mois - 1, jour); // mois - 1 car les mois en JS sont 0-indexés
