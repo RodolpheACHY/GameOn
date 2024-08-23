@@ -53,13 +53,13 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(dateNaissanceElement);
   }
 
-  dateNaiss = new Date(dateNaissanceElement.value);
+   dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
   if (validDateNaiss18 === false) {
-    setErrorElement(validDateNaiss18);
+    setErrorElement(dateNaissanceElement);
   } else {
-    resetErrorElement(validDateNaiss18);
-  }
+    resetErrorElement(dateNaissanceElement);
+  } 
 
   const nbConcoursElement = document.getElementById("quantity");
   const nbConcours = nbConcoursElement.value;
@@ -70,17 +70,23 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nbConcoursElement);
   }
 
- 
-  const listBtnRadiovilleElement = document.querySelectorAll('input[name="location"]');
-  const location = listBtnRadioville[i].value
-  const validBtnRadioVille = validerBtnRadioVille(location);
-  if (validBtnRadioVille === false) {
+  
+  const listBtnRadiovilleElement =  document.getElementById("choixVille"); //document.querySelector('input[name="location"]');
+  //const location = listBtnRadiovilleElement[i].value
+  //const validBtnRadioVille = validerBtnRadioVille(location);
+  if (validerBtnRadioVille() === false) {
     setErrorElement(listBtnRadiovilleElement);
   } else {
     resetErrorElement(listBtnRadiovilleElement);
   }
   
-  
+  const accepterConditionsElement = document.getElementById("checkbox1");
+  if (validerAccepterConditions() === false) {
+    setErrorElement(accepterConditionsElement);
+  } else {
+    resetErrorElement(accepterConditionsElement);
+  }
+
 });
 
 function setErrorElement(input) {
@@ -181,7 +187,7 @@ function valider18ans(dateNaiss) {
  */
 function validerDateNaiss(dateNaiss) {
   // Regex pour valider le format JJ/MM/AAAA
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+  const dateRegex = new RegExp("^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$");
 
   if (!dateRegex.test(dateNaiss)) {
       return false; // Format incorrect
@@ -239,12 +245,11 @@ function validerBtnRadioVille() {
 function validerAccepterConditions() {
   let baliseAccepter = document.getElementById("checkbox1");
   let accepter = baliseAccepter.checked;
-  if (!accepter) {
-    throw new Error(
-      "Merci de bien vouloir accepter les conditions d'utilisation"
-    );
-  }
-  console.log(accepter); // affiche true ou false
+    if (!accepter) {
+      return false;
+    } else {  
+      return true;
+    }
 }
 
 /**
