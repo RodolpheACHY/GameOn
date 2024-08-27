@@ -35,10 +35,10 @@ img {
   margin: 3.5%;
 }
 .header-logo {
-    float: left;
+  float: left;
 }
 .main-navbar {
-    float: right;
+  float: right;
 }
 .topnav a {
   float: left;
@@ -69,7 +69,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
@@ -77,7 +79,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -90,16 +94,16 @@ img {
   }
 }
 
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
     margin-top: -15px;
   }
-} 
+}
 
 main {
   font-size: 130%;
@@ -111,8 +115,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -215,13 +217,13 @@ input {
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: right;
+  text-align: left;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
 }
 .formData[data-error-visible="true"]::after {
-  opacity: 1;
+  opacity: 1 !important;
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
@@ -482,6 +484,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
@@ -497,6 +500,9 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+}
+h2.confirmation {
+  text-align: left;
 }
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -546,4 +552,3 @@ footer {
     opacity: 1;
   }
 }
-

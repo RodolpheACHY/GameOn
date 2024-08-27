@@ -52,9 +52,9 @@
         </button>
       </div>
 
-      <div class="bground">
+      <div class="bground" id="formModal">
         <div class="content">
-          <span class="close"></span>
+          <span class="close js-close"></span>
           <div class="modal-body">
             <form novalidate
               name="reserve"
@@ -94,7 +94,7 @@
               </div>
               <div
                 class="formData" data-error="La date saisie n'est pas valide."
-                                 data-error-too-young="Vous êtes trop jeune.">
+                                >
                 <label>Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -212,12 +212,12 @@
       
       <div id="confirmationModal" class="bground">
         <div class="content">
-          <span class="close"></span>
+          <span class="close js-close"></span>
           <div class="modal-body">
             <div>
               <h2 class="confirmation">Merci pour votre inscription !</h2>
             </div>
-            <button class="btn-signup modal-btn">
+            <button class="btn-signup modal-btn js-close">
               Fermer
             </button>
 
