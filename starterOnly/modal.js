@@ -12,21 +12,24 @@ const modalbg = document.querySelector(".bground");
 const modalConfirm = document.getElementById("confirmationModal");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelector(".close");
+const closeBtns = document.querySelectorAll(".js-close");
 const navLink = document.querySelector("#nav");
 const form = document.querySelector('form[name="reserve"]');
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-   // Initialiser le tableau des erreurs
+  // Initialiser le tableau des erreurs
   const errors = [];
   // Vérification du prénom
   const prenomElement = document.getElementById("first");
   const prenom = prenomElement.value;
   const validPrenom = validerPrenom(prenom);
   if (validPrenom === false) {
-    errors.push({fieldName: "prénom", message:"Le prénom doit contenir au moins 2 caractères."});
+    errors.push({
+      fieldName: "prénom",
+      message: "Le prénom doit contenir au moins 2 caractères.",
+    });
     setErrorElement(prenomElement);
   } else {
     resetErrorElement(prenomElement);
@@ -37,7 +40,10 @@ form.addEventListener("submit", function (event) {
   const nom = nomElement.value;
   const validNom = validerNom(nom);
   if (validNom === false) {
-    errors.push({fieldName: "nom", message:"Le nom doit contenir au moins 2 caractères."});
+    errors.push({
+      fieldName: "nom",
+      message: "Le nom doit contenir au moins 2 caractères.",
+    });
     setErrorElement(nomElement);
   } else {
     resetErrorElement(nomElement);
@@ -48,85 +54,95 @@ form.addEventListener("submit", function (event) {
   const email = emailElement.value;
   const validEmail = validerEmail(email);
   if (validEmail === false) {
-    errors.push({fieldName: "email", message:"L'email n'est pas valide."});
+    errors.push({ fieldName: "email", message: "L'email n'est pas valide." });
     setErrorElement(emailElement);
   } else {
     resetErrorElement(emailElement);
   }
-  
+
   // Vérification si le champ est vide
   const dateNaissanceElement = document.getElementById("birthdate");
-  let dateNaiss = new Date(dateNaissanceElement.value);
-  const validDateNaissNonVide = validerChampsNonVide(dateNaiss);
-  if (validDateNaissNonVide === false) {
-    errors.push({fieldName: "date de naissance", message:"La date de naissance est obligatoire."});
+  // Vérification de l'âge du participant
+  dateNaiss = new Date(dateNaissanceElement.value);
+  const validDateNaiss18 = valider18ans(dateNaiss);
+
+  if (dateNaissanceElement.value === "") {
+    errors.push({
+      fieldName: "date de naissance",
+      message: "La date de naissance est obligatoire.",
+    });
+    dateNaissanceElement.closest(".formData").dataset.error =
+      "La date de naissance est obligatoire.";
+    setErrorElement(dateNaissanceElement);
+  } else if (validDateNaiss18 === false) {
+    errors.push({
+      fieldName: "âge minimum",
+      message: "Vous devez avoir au moins 18 ans pour participer au concours.",
+    });
+    dateNaissanceElement.closest(".formData").dataset.error =
+      "Vous devez avoir au moins 18 ans pour participer au concours.";
     setErrorElement(dateNaissanceElement);
   } else {
     resetErrorElement(dateNaissanceElement);
   }
-  
-  // Vérification du format de la date de naissance saisie
-  /* const validDateNaiss = validerDateNaiss(dateNaiss);
-  if (validDateNaiss === false) {
-    errors.push("La date de naissance n'est pas valide.");
-    setErrorElement(dateNaissanceElement);
-  } else {
-    resetErrorElement(dateNaissanceElement);
-  } */
 
-  // Vérification de l'âge du participant
-  dateNaiss = new Date(dateNaissanceElement.value);
-  const validDateNaiss18 = valider18ans(dateNaiss);
-  if (validDateNaiss18 === false) {
-    errors.push({fieldName: "âge minimum", message:"Vous devez avoir au moins 18 ans pour participer au concours."});
-    setErrorTooYoungElement(dateNaissanceElement);
-  } else {
-    resetErrorTooYoungElement(dateNaissanceElement);
-  } 
-
-  // Vérification du nombre de concours auxquels le user a déjà participé 
+  // Vérification du nombre de concours auxquels le user a déjà participé
   const nbConcoursElement = document.getElementById("quantity");
   const nbConcours = nbConcoursElement.value;
   const validNbConcours = validerNbConcours(nbConcours);
   if (validNbConcours === false) {
     //errors.push("Le nombre de concours doit être un nombre entier positif.");
-    errors.push({fieldName: "nombre de concours", message:"Le nombre de concours doit être un nombre entier positif."});
+    errors.push({
+      fieldName: "nombre de concours",
+      message: "Le nombre de concours doit être un nombre entier positif.",
+    });
     setErrorElement(nbConcoursElement);
   } else {
     resetErrorElement(nbConcoursElement);
   }
 
   // Vérification de la ville sélectionnée
-  const listBtnRadiovilleElement =  document.getElementById("choixVille"); 
+  const listBtnRadiovilleElement = document.getElementById("choixVille");
   if (validerBtnRadioVille() === false) {
-    errors.push({fieldName: "ville", message:"Vous devez sélectionner une ville."});
+    errors.push({
+      fieldName: "ville",
+      message: "Vous devez sélectionner une ville.",
+    });
     setErrorElement(listBtnRadiovilleElement);
   } else {
     resetErrorElement(listBtnRadiovilleElement);
   }
-  
+
   // Vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
   const accepterConditionsElement = document.getElementById("checkbox1");
   if (validerAccepterConditions() === false) {
-    errors.push({fieldName: "conditions d'utilisation", message:"Vous devez accepter les conditions d'utilisation."});
+    errors.push({
+      fieldName: "conditions d'utilisation",
+      message: "Vous devez accepter les conditions d'utilisation.",
+    });
     setErrorElement(accepterConditionsElement);
   } else {
     resetErrorElement(accepterConditionsElement);
   }
 
-  // Si le tableau des erreurs n'est pas vide, on affiche les erreurs 
+  // Si le tableau des erreurs n'est pas vide, on affiche les erreurs
   if (errors.length > 0) {
     let errorMessage = "";
-    errors.forEach(error => {
+    errors.forEach((error) => {
       errorMessage += `${error.fieldName} : ${error.message}\n`;
     });
-    alert(errorMessage);
+    // alert(errorMessage);
     //alert(errors.join("\n"));
+    return false;
   } else {
     // closeModal();  // On ferme la popup
-    alert("votre formulaire a été envoyé avec succès !");
+    //alert("votre formulaire a été envoyé avec succès !");
+    // afficher le message de confirmation
     form.reset(); // On réinitialise le formulaire
+    const formModal = document.getElementById("formModal");
 
+    formModal.style.display = "none";
+    modalConfirm.style.display = "block";
   }
 });
 
@@ -157,15 +173,14 @@ const tooYoungMessage = errorEl.getAttribute("data-error-too-young");
 
 navLink.addEventListener("click", editNav);
 
+const signupBtn = document.querySelector(".btn-signup");
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+signupBtn.addEventListener("click", launchModal);
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
-
-
 
 // launch modal form
 function launchModalConfirm() {
@@ -173,14 +188,17 @@ function launchModalConfirm() {
 }
 
 // close modal event
-closeBtn.addEventListener("click", () => {
-  // Quand on a cliqué sur la croix, on ferme la popup
-  closeModal();
-});
+closeBtns.forEach((b) =>
+  b.addEventListener("click", () => {
+    // Quand on a cliqué sur la croix, on ferme la popup
+    closeModal();
+  })
+);
 
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  modalConfirm.style.display = "none";
 }
 
 /**
@@ -190,11 +208,11 @@ function closeModal() {
  * @throws {Error}
  */
 function validerPrenom(prenom) {
-   // Initialiser le tableau des erreurs
+  // Initialiser le tableau des erreurs
   if (prenom.length >= 2) {
     return true;
   }
-    return false;
+  return false;
 }
 
 /**
@@ -207,7 +225,7 @@ function validerNom(nom) {
   if (nom.length >= 2) {
     return true;
   }
-    return false;
+  return false;
 }
 
 /**
@@ -218,11 +236,10 @@ function validerNom(nom) {
 function validerEmail(email) {
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
   if (!emailRegExp.test(email)) {
-    return false
+    return false;
   }
-    return true;
+  return true;
 }
-
 
 /**
  * Cette fonction prend une date en paramètre et vérifie si le champs n'est pas vide
@@ -250,9 +267,12 @@ function valider18ans(dateNaiss) {
   //console.log(dateNaissFormated);
   let age = maintenant.getFullYear() - date.getFullYear();
   const moisDifference = maintenant.getMonth() - date.getMonth();
-  if (moisDifference < 0 || (moisDifference === 0 && maintenant.getDate() < date.getDate())) {
+  if (
+    moisDifference < 0 ||
+    (moisDifference === 0 && maintenant.getDate() < date.getDate())
+  ) {
     age--; // On n'a pas encore atteint l'anniversaire
-  }  
+  }
   return age >= ageMinimum;
 }
 
@@ -289,7 +309,7 @@ function validerNbConcours(nbConcours) {
   if (!quantityRegExp.test(nbConcours)) {
     return false;
   }
-    return true;
+  return true;
 }
 
 /**
@@ -309,7 +329,7 @@ function validerBtnRadioVille() {
 
   if (location === "") {
     return false;
-  } else {  
+  } else {
     return true;
   }
 }
@@ -322,11 +342,11 @@ function validerBtnRadioVille() {
 function validerAccepterConditions() {
   let baliseAccepter = document.getElementById("checkbox1");
   let accepter = baliseAccepter.checked;
-    if (!accepter) {
-      return false;
-    } else {  
-      return true;
-    }
+  if (!accepter) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 /**
