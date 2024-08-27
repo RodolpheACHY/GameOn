@@ -129,6 +129,14 @@ main {
   cursor: pointer;
 }
 
+.modal-body .modal-btn-confirm {
+  position: relative;
+  top: 340px;
+  font-size: 1rem;
+  margin: 0 auto;
+  padding: 12px 82px;
+}
+
 .modal-btn:hover {
   background: #3876ac;
 }
@@ -183,6 +191,14 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+}
+
+.content_confirm {
+  height: 857px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-body {
@@ -502,8 +518,10 @@ footer {
   margin: 0 20px;
 }
 h2.confirmation {
-  text-align: left;
+  text-align: center;
+  font-weight: 400;
 }
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
