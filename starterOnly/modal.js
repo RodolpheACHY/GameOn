@@ -16,7 +16,6 @@ const closeBtn = document.querySelector(".close");
 const navLink = document.querySelector("#nav");
 const form = document.querySelector('form[name="reserve"]');
 
-
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -27,7 +26,7 @@ form.addEventListener("submit", function (event) {
   const prenom = prenomElement.value;
   const validPrenom = validerPrenom(prenom);
   if (validPrenom === false) {
-    errors.push("Le prénom doit contenir au moins 2 caractères.");
+    errors.push({fieldName: "prénom", message:"Le prénom doit contenir au moins 2 caractères."});
     setErrorElement(prenomElement);
   } else {
     resetErrorElement(prenomElement);
@@ -38,7 +37,7 @@ form.addEventListener("submit", function (event) {
   const nom = nomElement.value;
   const validNom = validerNom(nom);
   if (validNom === false) {
-    errors.push("Le nom doit contenir au moins 2 caractères.");
+    errors.push({fieldName: "nom", message:"Le nom doit contenir au moins 2 caractères."});
     setErrorElement(nomElement);
   } else {
     resetErrorElement(nomElement);
@@ -49,7 +48,7 @@ form.addEventListener("submit", function (event) {
   const email = emailElement.value;
   const validEmail = validerEmail(email);
   if (validEmail === false) {
-    errors.push("L'email n'est pas valide.");
+    errors.push({fieldName: "email", message:"L'email n'est pas valide."});
     setErrorElement(emailElement);
   } else {
     resetErrorElement(emailElement);
@@ -60,7 +59,7 @@ form.addEventListener("submit", function (event) {
   let dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaissNonVide = validerChampsNonVide(dateNaiss);
   if (validDateNaissNonVide === false) {
-    errors.push("La date de naissance est obligatoire.");
+    errors.push({fieldName: "date de naissance", message:"La date de naissance est obligatoire."});
     setErrorElement(dateNaissanceElement);
   } else {
     resetErrorElement(dateNaissanceElement);
@@ -79,7 +78,7 @@ form.addEventListener("submit", function (event) {
   dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
   if (validDateNaiss18 === false) {
-    errors.push("Vous devez avoir au moins 18 ans pour participer au concours.");
+    errors.push({fieldName: "âge minimum", message:"Vous devez avoir au moins 18 ans pour participer au concours."});
     setErrorTooYoungElement(dateNaissanceElement);
   } else {
     resetErrorTooYoungElement(dateNaissanceElement);
@@ -90,7 +89,8 @@ form.addEventListener("submit", function (event) {
   const nbConcours = nbConcoursElement.value;
   const validNbConcours = validerNbConcours(nbConcours);
   if (validNbConcours === false) {
-    errors.push("Le nombre de concours doit être un nombre entier positif.");
+    //errors.push("Le nombre de concours doit être un nombre entier positif.");
+    errors.push({fieldName: "nombre de concours", message:"Le nombre de concours doit être un nombre entier positif."});
     setErrorElement(nbConcoursElement);
   } else {
     resetErrorElement(nbConcoursElement);
@@ -99,7 +99,7 @@ form.addEventListener("submit", function (event) {
   // Vérification de la ville sélectionnée
   const listBtnRadiovilleElement =  document.getElementById("choixVille"); 
   if (validerBtnRadioVille() === false) {
-    errors.push("Vous devez sélectionner une ville.");
+    errors.push({fieldName: "ville", message:"Vous devez sélectionner une ville."});
     setErrorElement(listBtnRadiovilleElement);
   } else {
     resetErrorElement(listBtnRadiovilleElement);
@@ -108,7 +108,7 @@ form.addEventListener("submit", function (event) {
   // Vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
   const accepterConditionsElement = document.getElementById("checkbox1");
   if (validerAccepterConditions() === false) {
-    errors.push("Vous devez accepter les conditions d'utilisation.");
+    errors.push({fieldName: "conditions d'utilisation", message:"Vous devez accepter les conditions d'utilisation."});
     setErrorElement(accepterConditionsElement);
   } else {
     resetErrorElement(accepterConditionsElement);
@@ -116,7 +116,12 @@ form.addEventListener("submit", function (event) {
 
   // Si le tableau des erreurs n'est pas vide, on affiche les erreurs 
   if (errors.length > 0) {
-    alert(errors.join("\n"));
+    let errorMessage = "";
+    errors.forEach(error => {
+      errorMessage += `${error.fieldName} : ${error.message}\n`;
+    });
+    alert(errorMessage);
+    //alert(errors.join("\n"));
   } else {
     // closeModal();  // On ferme la popup
     alert("votre formulaire a été envoyé avec succès !");
