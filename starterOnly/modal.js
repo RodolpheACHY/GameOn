@@ -156,33 +156,21 @@ function resetErrorElement(input) {
   errorEl.removeAttribute("data-error-visible");
 }
 
-function setErrorTooYoungElement(input) {
-  const errorEl = input.closest(".formData");
-  errorEl.setAttribute("data-error-too-young-visible", "true");
-}
-
-function resetErrorTooYoungElement(input) {
-  const errorEl = input.closest(".formData");
-  errorEl.removeAttribute("data-error-too-young-visible");
-}
-
-/*function message18AnsElement(input) {
-const errorEl = input.closest(".formData");
-const tooYoungMessage = errorEl.getAttribute("data-error-too-young");
-}*/
-
 navLink.addEventListener("click", editNav);
 
-const signupBtn = document.querySelector(".btn-signup");
 // launch modal event
-signupBtn.addEventListener("click", launchModal);
+// const signupBtn = document.querySelector(".btn-signup");
+// signupBtn.addEventListener("click", launchModal);
+
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// launch modal form
+// launch modal formConfirm
 function launchModalConfirm() {
   modalConfirm.style.display = "block";
 }
