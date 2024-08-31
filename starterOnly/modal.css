@@ -142,7 +142,17 @@ span:hover {
     display: block;
     margin-top: -15px;
   }
+  .hero-headline {
+    font-size: 2.5rem;
+    white-space: normal;
+    font-weight: bold;
+  }
+  .hero-text {
+    width: unset;
+    font-size: 0.813rem;
+  }
 }
+
 
 main {
   font-size: 130%;
