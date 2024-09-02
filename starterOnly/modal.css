@@ -175,9 +175,8 @@ span:hover {
     width: 103px;
     height: 19px;
   }
-  .navbar-white-bg {
-    background-color: white;
-  }
+  .header-logo img {
+    margin-top: 13px;
 }
 
 
