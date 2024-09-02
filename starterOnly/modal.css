@@ -142,7 +142,13 @@ span:hover {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    margin-top: 0;
+  }
+  .hero-section .hero-content {
+    min-width: inherit;
+  }
+  .hero-section .hero-content br {
+    display: none;
   }
   .hero-content .hero-headline {
     font-size: 2.5rem;
@@ -169,7 +175,7 @@ span:hover {
   }
   .icon .fa-bar-xxl {
     font-size: larger;
-    margin-top: 5px;
+    margin-top: 0;
   }
   img {
     width: 103px;
@@ -177,8 +183,8 @@ span:hover {
   }
   .header-logo img {
     margin-top: 13px;
+  }
 }
-
 
 main {
   font-size: 130%;
