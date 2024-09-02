@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalConfirm = document.getElementById("confirmationModal");
 const modalBtn = document.querySelectorAll(".modal-btn");
+//const modalBtnId = document.getElementById('modal-btn-id');
 const formData = document.querySelectorAll(".formData");
 const closeBtns = document.querySelectorAll(".js-close");
 const navLink = document.querySelector("#nav");
@@ -165,6 +166,12 @@ navLink.addEventListener("click", editNav);
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
+// launch navbar event in mobile version on the top of the form
+/* modalBtnId.addEventListener("click", () => {
+  launchModal();
+  keepNavbarOnTop();
+}); */
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -188,6 +195,17 @@ function closeModal() {
   modalbg.style.display = "none";
   modalConfirm.style.display = "none";
 }
+
+/*function keepNavbarOnTop() {
+  const navbar = document.getElementById('myTopnav');
+  const navbarWhiteBbg = document.querySelector('navbar-white-bg');
+  navbar.style.zIndex = '101'; // Ajustez cette valeur si nécessaire
+  //navbar.style.position = 'fixed';
+  navbar.style.backgroundColor = '#ffffff';
+  modalbg.style.zIndex = '100'; // Ajustez cette valeur si nécessaire
+  modalbg.style.position = 'absolute';
+  navbarWhiteBbg.classList.add = 'navbar-white-bg';
+} */
 
 /**
  * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
