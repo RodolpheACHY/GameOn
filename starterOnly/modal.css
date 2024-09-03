@@ -48,7 +48,7 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 18px;   /* 20px; */
+  font-size: 18px; /* 20px; */
   font-family: Roboto, sans-serif;
 }
 
@@ -71,119 +71,6 @@ img {
 span:hover {
   padding-bottom: 2px;
   border-bottom: 2px solid #f2f2f2;
-}
-
-/*@media screen and (max-width: 768px) { */
-@media screen and (max-width: 940px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-/*@media screen and (max-width: 768px) { */
-@media screen and (max-width: 940px) {
-  .topnav.responsive {
-    position: relative;
-  }
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-
-  .fa-bar-red {
-    color: #ff0000 ;
-  }
-  
-  .fa-bar-red:hover {
-    color: #ffffff;
-  }
-
-  .icon .fa-bar-xxl {
-    font-size: xx-large;
-  }
-
-  .main-navbar a:first-child {
-    margin-top: 60px;
-  }
-}
-
-/*
-@media screen and (max-width: 800px) {
-  .icon .fa-bar-xxl {
-    font-size: larger;
-    margin-top: 5px;
-  }
-  img {
-    width: 103px;
-    height: 19px;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} */
-
-/* @media screen and (max-width: 540px) { */
-@media screen and (max-width: 800px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: 0;
-  }
-  .hero-section .hero-content {
-    min-width: inherit;
-  }
-  .hero-section .hero-content br {
-    display: none;
-  }
-  .hero-content .hero-headline {
-    font-size: 2.5rem;
-    white-space: normal;
-    font-weight: bold;
-  }
-  .hero-content .hero-text {
-    width: unset;
-    font-size: 0.813rem;
-    margin-top: 17px;
-  }
-  p.copyrights {
-    margin-top: 0px;
-  }
-  .hero-section .hero-content {
-    padding-top: 0px;
-    padding-left: 0px;
-  }
-  .hero-section .hero-img img {
-    margin-top: 35px;
-  }
-  .header-logo {
-    margin-left: 15px;
-  }
-  .icon .fa-bar-xxl {
-    font-size: larger;
-    margin-top: 0;
-  }
-  img {
-    width: 103px;
-    height: 19px;
-  }
-  .header-logo img {
-    margin-top: 13px;
-  }
 }
 
 main {
@@ -410,8 +297,8 @@ input[data-error]::after {
 .close:hover {
   transform: scale(1) rotate(45deg);
   opacity: 0.7;
-  transition: transform 500ms ease-in-out both;
-  /* transition: transform 0.3s ease-in-out; */
+  border-bottom: none;
+  transition: transform 0.3s ease-in-out;
 }
 .close:before,
 .close:after {
@@ -516,7 +403,7 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height:  657px;   /* 93vh; */
+  min-height: 657px; /* 93vh; */
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -595,7 +482,97 @@ h2.confirmation {
   font-weight: 400;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 992px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .hero-headline {
+    white-space: normal;
+  }
+
+  .fa-bar-red {
+    color: #ff0000;
+  }
+
+  .fa-bar-red:hover {
+    color: #ffffff;
+  }
+
+  .icon .fa-bar-xxl {
+    font-size: xx-large;
+  }
+
+  .main-navbar a:first-child {
+    margin-top: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: 0;
+  }
+  .hero-section .hero-content {
+    min-width: inherit;
+  }
+  .hero-section .hero-content br {
+    display: none;
+  }
+  .hero-content .hero-headline {
+    font-size: 2.5rem;
+    white-space: normal;
+    font-weight: bold;
+  }
+  .hero-content .hero-text {
+    width: unset;
+    font-size: 0.813rem;
+    margin-top: 17px;
+  }
+  p.copyrights {
+    margin-top: 0px;
+  }
+  .hero-section .hero-content {
+    padding-top: 0px;
+    padding-left: 0px;
+  }
+  .hero-section .hero-img img {
+    margin-top: 35px;
+  }
+  .header-logo {
+    margin-left: 15px;
+  }
+  .icon .fa-bar-xxl {
+    font-size: larger;
+    margin-top: 0;
+  }
+  img {
+    width: 103px;
+    height: 19px;
+  }
+  .header-logo img {
+    margin-top: 13px;
+  }
   .hero-section {
     display: block;
     box-shadow: unset;
