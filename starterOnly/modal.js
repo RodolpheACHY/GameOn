@@ -11,7 +11,6 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalConfirm = document.getElementById("confirmationModal");
 const modalBtn = document.querySelectorAll(".modal-btn");
-//const modalBtnId = document.getElementById('modal-btn-id');
 const formData = document.querySelectorAll(".formData");
 const closeBtns = document.querySelectorAll(".js-close");
 const navLink = document.querySelector("#nav");
@@ -20,8 +19,9 @@ const form = document.querySelector('form[name="reserve"]');
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Initialiser le tableau des erreurs
+  // Initialisation du tableau des erreurs
   const errors = [];
+
   // Vérification du prénom
   const prenomElement = document.getElementById("first");
   const prenom = prenomElement.value;
@@ -61,9 +61,8 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(emailElement);
   }
 
-  // Vérification si le champ est vide
+  // fonction de vérification de champ non vide & âge du participant supérieur à 18 ans
   const dateNaissanceElement = document.getElementById("birthdate");
-  // Vérification de l'âge du participant
   dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
 
@@ -87,12 +86,11 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(dateNaissanceElement);
   }
 
-  // Vérification du nombre de concours auxquels le user a déjà participé
+  // fonction de vérification du nombre de concours auxquels le user a déjà participé
   const nbConcoursElement = document.getElementById("quantity");
   const nbConcours = nbConcoursElement.value;
   const validNbConcours = validerNbConcours(nbConcours);
   if (validNbConcours === false) {
-    //errors.push("Le nombre de concours doit être un nombre entier positif.");
     errors.push({
       fieldName: "nombre de concours",
       message: "Le nombre de concours doit être un nombre entier positif.",
@@ -102,7 +100,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nbConcoursElement);
   }
 
-  // Vérification de la ville sélectionnée
+  // fonction de vérification des boutons radios pour s'assurer de la sélection d'une ville
   const listBtnRadiovilleElement = document.getElementById("choixVille");
   if (validerBtnRadioVille() === false) {
     errors.push({
@@ -114,7 +112,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(listBtnRadiovilleElement);
   }
 
-  // Vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
+  // fonction de vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
   const accepterConditionsElement = document.getElementById("checkbox1");
   if (validerAccepterConditions() === false) {
     errors.push({
@@ -132,16 +130,11 @@ form.addEventListener("submit", function (event) {
     errors.forEach((error) => {
       errorMessage += `${error.fieldName} : ${error.message}\n`;
     });
-    // alert(errorMessage);
-    //alert(errors.join("\n"));
     return false;
   } else {
-    // closeModal();  // On ferme la popup
-    //alert("votre formulaire a été envoyé avec succès !");
     // afficher le message de confirmation
     form.reset(); // On réinitialise le formulaire
     const formModal = document.getElementById("formModal");
-
     formModal.style.display = "none";
     modalConfirm.style.display = "block";
   }
@@ -160,17 +153,7 @@ function resetErrorElement(input) {
 navLink.addEventListener("click", editNav);
 
 // launch modal event
-// const signupBtn = document.querySelector(".btn-signup");
-// signupBtn.addEventListener("click", launchModal);
-
-// launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch navbar event in mobile version on the top of the form
-/* modalBtnId.addEventListener("click", () => {
-  launchModal();
-  keepNavbarOnTop();
-}); */
 
 // launch modal form
 function launchModal() {
@@ -196,25 +179,13 @@ function closeModal() {
   modalConfirm.style.display = "none";
 }
 
-/*function keepNavbarOnTop() {
-  const navbar = document.getElementById('myTopnav');
-  const navbarWhiteBbg = document.querySelector('navbar-white-bg');
-  navbar.style.zIndex = '101'; // Ajustez cette valeur si nécessaire
-  //navbar.style.position = 'fixed';
-  navbar.style.backgroundColor = '#ffffff';
-  modalbg.style.zIndex = '100'; // Ajustez cette valeur si nécessaire
-  modalbg.style.position = 'absolute';
-  navbarWhiteBbg.classList.add = 'navbar-white-bg';
-} */
 
 /**
  * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
  * ici : deux caractères au minimum
  * @param {string} prenom
- * @throws {Error}
  */
 function validerPrenom(prenom) {
-  // Initialiser le tableau des erreurs
   if (prenom.length >= 2) {
     return true;
   }
@@ -225,7 +196,6 @@ function validerPrenom(prenom) {
  * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
  * ici : deux caractères au minimum
  * @param {string} nom
- * @throws {Error}
  */
 function validerNom(nom) {
   if (nom.length >= 2) {
@@ -237,7 +207,6 @@ function validerNom(nom) {
 /**
  * Cette fonction prend un email en paramètre et valide qu'il est au bon format.
  * @param {string} email
- * @throws {Error}
  */
 function validerEmail(email) {
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
@@ -252,7 +221,6 @@ function validerEmail(email) {
  * @param {Date} dateNaiss
  */
 function validerChampsNonVide(dateNaiss) {
-  // if (!dateNaiss || dateNaiss === "jj/mm/aaaa" || dateNaiss === "") {
   if (!dateNaiss) {
     return false; // Le champ est vide
   } else {
@@ -269,8 +237,6 @@ function valider18ans(dateNaiss) {
   const maintenant = new Date();
   const ageMinimum = 18;
   const date = new Date(dateNaiss);
-  //let dateNaissFormated = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  //console.log(dateNaissFormated);
   let age = maintenant.getFullYear() - date.getFullYear();
   const moisDifference = maintenant.getMonth() - date.getMonth();
   if (
@@ -281,30 +247,6 @@ function valider18ans(dateNaiss) {
   }
   return age >= ageMinimum;
 }
-
-/**
- * Cette fonction prend une date en paramètre et vérifie si la date saisie est valide
- * ici : deux caractères au minimum
- * @param {Date} dateNaiss
- */
-
-/*function validerDateNaiss(dateNaiss) {
-  //const date = new Date(dateNaiss);
-  //let dateNaissFormated = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  // Regex pour valider le format JJ/MM/AAAA
-   const dateRegex = new RegExp("^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$");
-  if (!dateRegex.test(date)) {
-      return false; // Format incorrect
-  }
-
-  const [jour, mois, annee] = dateNaiss.split('/').map(Number);
-  date = new Date(annee, mois - 1, jour); // mois - 1 car les mois en JS sont 0-indexés
-  // Vérifie que la date est valide (par exemple, pas de 30 février)
-  if (dateNaiss.getDate() !== jour || dateNaiss.getMonth() !== mois - 1 || dateNaiss.getFullYear() !== annee) {
-      return false; // Date non valide
-  }
-      return true;
-} */
 
 /**
  * Cette fonction prend un string en paramètre et valide qu'il est au bon format.
@@ -318,11 +260,8 @@ function validerNbConcours(nbConcours) {
   return true;
 }
 
-/**
- * Cette fonction vérifie qu'au moins une ville a bien été sélectionnée
- *
- * @throws {Error}
- */
+
+ // fonction qui vérifie les boutons radios afin de s'assurer qu'une ville a bien été sélectionnée
 function validerBtnRadioVille() {
   let listBtnRadioville = document.querySelectorAll('input[name="location"]');
   let location = "";
@@ -340,11 +279,7 @@ function validerBtnRadioVille() {
   }
 }
 
-/**
- * Cette fonction vérifie que la case à cocher a bien été cochée pour les conditions d'utilisation
- *
- * @throws {Error}
- */
+// fonction qui vérifie que la case à cocher a bien été cochée pour les conditions d'utilisation
 function validerAccepterConditions() {
   let baliseAccepter = document.getElementById("checkbox1");
   let accepter = baliseAccepter.checked;
@@ -355,13 +290,9 @@ function validerAccepterConditions() {
   }
 }
 
-/**
- * Cette fonction vérifie si la case à cocher a été cochée ou pas être prévenu des futurs événements
- *
- * @throws {Error}
- */
+// Cette fonction vérifie si la case à cocher pour les événements à venir a été cochée ou pas 
 function validerPrchEvenmnt() {
   let balisePrchEvenmnt = document.getElementById("checkbox2");
   let PrchEvenmnt = balisePrchEvenmnt.checked;
-  console.log(PrchEvenmnt); // affiche true ou false
+  console.log(PrchEvenmnt); // affiche true ou false dans la console mais pourrait déclencher l'envoi d'un mail dans une version plus évoluée du projet
 }

@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
 }
+
 /* Landing Page */
 
 body {
@@ -213,12 +214,6 @@ input {
   border: 2px solid #e54858;
 }
 
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -441,7 +436,7 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 100px; /* 57px; */
+  margin-top: 100px;
   padding: 0;
 }
 .btn-signup {
@@ -450,7 +445,7 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 100px; /* 59px; */
+  margin-top: 100px; 
 }
 .hero-img {
   grid-column: span 8;
