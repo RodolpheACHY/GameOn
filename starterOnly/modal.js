@@ -16,13 +16,14 @@ const closeBtns = document.querySelectorAll(".js-close");
 const navLink = document.querySelector("#nav");
 const form = document.querySelector('form[name="reserve"]');
 
+// ajout d'un écouteur d'évènement "submit" sur le formulaire
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   // Initialisation du tableau des erreurs
   const errors = [];
 
-  // Vérification du prénom
+  // vérification du prénom
   const prenomElement = document.getElementById("first");
   const prenom = prenomElement.value;
   const validPrenom = validerPrenom(prenom);
@@ -36,7 +37,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(prenomElement);
   }
 
-  // Vérification du nom
+  // vérification du nom
   const nomElement = document.getElementById("last");
   const nom = nomElement.value;
   const validNom = validerNom(nom);
@@ -50,7 +51,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nomElement);
   }
 
-  // Vérification de l'email
+  // vérification de l'email
   const emailElement = document.getElementById("email");
   const email = emailElement.value;
   const validEmail = validerEmail(email);
@@ -61,7 +62,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(emailElement);
   }
 
-  // fonction de vérification de champ non vide & âge du participant supérieur à 18 ans
+  // vérification de champ date de naisance non vide & âge du participant supérieur à 18 ans
   const dateNaissanceElement = document.getElementById("birthdate");
   dateNaiss = new Date(dateNaissanceElement.value);
   const validDateNaiss18 = valider18ans(dateNaiss);
@@ -86,7 +87,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(dateNaissanceElement);
   }
 
-  // fonction de vérification du nombre de concours auxquels le user a déjà participé
+  // vérification du nombre de concours auxquels le user a déjà participé saisi par l'utilisateur
   const nbConcoursElement = document.getElementById("quantity");
   const nbConcours = nbConcoursElement.value;
   const validNbConcours = validerNbConcours(nbConcours);
@@ -100,7 +101,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(nbConcoursElement);
   }
 
-  // fonction de vérification des boutons radios pour s'assurer de la sélection d'une ville
+  // vérification des boutons radios pour s'assurer de la sélection d'une ville
   const listBtnRadiovilleElement = document.getElementById("choixVille");
   if (validerBtnRadioVille() === false) {
     errors.push({
@@ -112,7 +113,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(listBtnRadiovilleElement);
   }
 
-  // fonction de vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
+  // vérification de la case à cocher pour confirmer l'acceptation des conditions d'utilisation
   const accepterConditionsElement = document.getElementById("checkbox1");
   if (validerAccepterConditions() === false) {
     errors.push({
@@ -124,7 +125,7 @@ form.addEventListener("submit", function (event) {
     resetErrorElement(accepterConditionsElement);
   }
 
-  // Si le tableau des erreurs n'est pas vide, on affiche les erreurs
+  // vérifie si le tableau d'erreurs est vide
   if (errors.length > 0) {
     let errorMessage = "";
     errors.forEach((error) => {
