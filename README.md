@@ -103,8 +103,8 @@ Tests sur :
 Pour toute question ou collaboration :
 
 ```
-📧 Email : *votre email ici*  
-💼 Portfolio : *votre lien ici*
+📧 Email : rod23_reseaux@yahoo.fr
+💼 Portfolio : en cours
 ```
 
 ---
