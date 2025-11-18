@@ -79,6 +79,7 @@ Tests sur :
 ```
 /
 │── README.md
+│── docs/
 └── starterOnly/
      │── Logo.png
      │── bg_img.jpg
@@ -92,7 +93,8 @@ Tests sur :
 
 ## 📸 Aperçu
 
-<img width="1324" height="846" alt="image" src="https://github.com/user-attachments/assets/a1c18aa8-3751-4bcd-af0d-4ce9b723fcda" />
+<img width="1326" height="782" alt="thumb6" src="https://github.com/user-attachments/assets/6dfef102-e6ab-4515-bb38-707e131fa0e0" />
+
 
 ---
 
