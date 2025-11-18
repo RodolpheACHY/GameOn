@@ -5,6 +5,7 @@
 3. Il n'y a aucune dépendance ;
 4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
 
+## En résumé
 GameOn est un projet visant à rendre une landing page totalement fonctionnelle grâce à du JavaScript Vanilla.  
 L'objectif était d’implémenter toute la logique du formulaire à partir d’un code HTML/CSS existant, en corrigeant les erreurs, en ajoutant les comportements manquants, et en améliorant l'expérience utilisateur.
 
