@@ -76,6 +76,7 @@ Tests sur :
 
 ## 📁 Structure du projet
 
+```
 GameOn/
 │── index.html
 │── css/
@@ -85,9 +86,7 @@ GameOn/
 └── assets/
 ├── images/
 └── icons/
-
-yaml
-Copier le code
+```
 
 ---
 
