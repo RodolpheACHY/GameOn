@@ -77,15 +77,15 @@ Tests sur :
 ## 📁 Structure du projet
 
 ```
-GameOn/
-│── index.html
-│── css/
-│ └── style.css
-│── js/
-│ └── form.js
-└── assets/
-├── images/
-└── icons/
+/
+│── README.md
+└── starterOnly/
+     │── Logo.png
+     │── bg_img.jpg
+     │── index.html
+     │── modal.css
+     │── modal.js
+     └── DM_Sans/
 ```
 
 ---
